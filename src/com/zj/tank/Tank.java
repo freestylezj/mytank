@@ -10,14 +10,14 @@ import java.awt.*;
  */
 public class Tank {
     private int x, y;
-    private int SPEED;//坦克移动速度
+    private int speed;//坦克移动速度
     private Direction directon = Direction.DOWN;//坦克移动方向
     private boolean moving = false;//坦克是否移动
 
-    public Tank(int x, int y, int SPEED) {
+    public Tank(int x, int y, int speed) {
         this.x = x;
         this.y = y;
-        this.SPEED = SPEED;
+        this.speed = speed;
     }
 
     public int getX() {
@@ -36,12 +36,12 @@ public class Tank {
         this.y = y;
     }
 
-    public int getSPEED() {
-        return SPEED;
+    public int getSpeed() {
+        return speed;
     }
 
-    public void setSPEED(int SPEED) {
-        this.SPEED = SPEED;
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public Direction getDirecton() {
@@ -77,16 +77,16 @@ public class Tank {
         if (!moving) return;
         switch (directon) {
             case UP:
-                y -= SPEED;
+                y -= speed;
                 break;
             case DOWN:
-                y += SPEED;
+                y += speed;
                 break;
             case LEFT:
-                x -= SPEED;
+                x -= speed;
                 break;
             case RIGHT:
-                x += SPEED;
+                x += speed;
                 break;
             default:
                 break;

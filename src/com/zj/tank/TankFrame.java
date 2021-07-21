@@ -15,14 +15,11 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     private Tank myTank = new Tank(200, 200, 5);
-//    int x = 200, y = 200;
-//    private static final int SPEED = 10;//坦克移动速度
-//    Direction directon = Direction.DOWN;//坦克移动方向
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setVisible(true);
-        setTitle("TANK WAR");
+        setTitle(" TANK - WAR ");
         setResizable(false);
 
         addKeyListener(new MyKeyListener());
