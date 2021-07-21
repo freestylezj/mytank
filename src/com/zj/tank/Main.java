@@ -3,7 +3,7 @@ package com.zj.tank;
 /**
  * @Auther: zhongj
  * @Date: 2021/7/18 - 07 - 18 - 16:15
- * @Description: com.zj.tank
+ * @Description: 程序入口
  * @version: 1.0
  */
 public class Main {

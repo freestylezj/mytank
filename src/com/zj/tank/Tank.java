@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * @Auther: zhongj
  * @Date: 2021/7/18 - 07 - 18 - 21:53
- * @Description: com.zj.tank
+ * @Description: 坦克
  * @version: 1.0
  */
 public class Tank {

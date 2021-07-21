@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 /**
  * @Auther: zhongj
  * @Date: 2021/7/18 - 07 - 18 - 16:27
- * @Description: com.zj.tank
+ * @Description: 程序主窗口
  * @version: 1.0
  */
 public class TankFrame extends Frame {
