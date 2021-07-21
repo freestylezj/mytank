@@ -9,8 +9,8 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Bullet {
-    private static final int WIDTH = 5;
-    private static final int HEIGHT = 5;
+    private static final int WIDTH = 8;
+    private static final int HEIGHT = 8;
     private int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
@@ -24,8 +24,8 @@ public class Bullet {
 
     public void paint(Graphics g) {
         Color c = g.getColor();//获取初始颜色
-        g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(Color.RED);//设置颜色
+        g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(c);//还原为初始颜色
         move();
     }
