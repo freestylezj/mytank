@@ -9,12 +9,13 @@ import java.awt.event.WindowEvent;
 /**
  * @Auther: zhongj
  * @Date: 2021/7/18 - 07 - 18 - 16:27
- * @Description: 程序主窗口
+ * @Description: 游戏画面
  * @version: 1.0
  */
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     private Tank myTank = new Tank(200, 200, 5);
+    private  Bullet bullet = new Bullet(300,300,10,Direction.DOWN);
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -35,6 +36,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
+        bullet.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
