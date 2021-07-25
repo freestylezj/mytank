@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 /**
  * @Auther: zhongj
@@ -14,8 +15,8 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    private Tank myTank = new Tank(200, 200, 5);
-    private  Bullet bullet = new Bullet(300,300,10,Direction.DOWN);
+    private Tank myTank = new Tank(200, 200, 20,this);
+    ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -36,7 +37,24 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
-        bullet.paint(g);
+        for (Bullet bullet:bulletList) {
+            bullet.paint(g);
+        }
+    }
+
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage,0,0,null);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -79,6 +97,9 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_RIGHT:
                     bright = false;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    myTank.fire();
                     break;
                 default:
                     break;

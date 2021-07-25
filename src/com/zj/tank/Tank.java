@@ -13,11 +13,13 @@ public class Tank {
     private int speed;//坦克移动速度
     private Direction directon = Direction.DOWN;//坦克移动方向
     private boolean moving = false;//坦克是否移动
+    private TankFrame tankframe;
 
-    public Tank(int x, int y, int speed) {
+    public Tank(int x, int y, int speed,TankFrame tankframe) {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.tankframe = tankframe;
     }
 
     public int getX() {
@@ -66,7 +68,10 @@ public class Tank {
      * @param g
      */
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 50);
+        g.setColor(c);
         move();
     }
 
@@ -93,4 +98,10 @@ public class Tank {
         }
     }
 
+    /**
+     * 坦克开火
+     */
+    public void fire() {
+        tankframe.bulletList.add(new Bullet(this.x,this.y,10,this.directon));
+    }
 }
