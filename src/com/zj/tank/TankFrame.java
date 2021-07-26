@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @Auther: zhongj
@@ -41,9 +42,25 @@ public class TankFrame extends Frame {
         g.drawString("子弹数量："+bulletList.size(),10,60);
         g.setColor(c);
         myTank.paint(g);
+        /* 会发生 java.util.ConcurrentModificationException
         for (Bullet bullet:bulletList) {
             bullet.paint(g);
         }
+        */
+        /* 该方案也是可以的
+        for(Iterator<Bullet> it = bulletList.iterator(); it.hasNext();){
+            Bullet bullet = it.next();
+            if(!bullet.live){
+                it.remove();
+            }else{
+                bullet.paint(g);
+            }
+        }
+        */
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).paint(g);
+        }
+
     }
 
     Image offScreenImage = null;

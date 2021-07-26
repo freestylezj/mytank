@@ -14,7 +14,7 @@ public class Bullet {
     private int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
-    private Boolean live = true;//是否存活
+    Boolean live = true;//是否存活
     private TankFrame tankFrame;
 
     public Bullet(int x, int y, int speed, Direction directon,TankFrame tankFrame) {
