@@ -17,14 +17,24 @@ public class Bullet {
     private int speed;//速度
     private Direction directon;//方向
     Boolean living = true;//是否存活
+    private Group group = Group.BAD;
     private TankFrame tankFrame;
 
-    public Bullet(int x, int y, int speed, Direction directon,TankFrame tankFrame) {
+    public Bullet(int x, int y, int speed, Direction directon,Group group,TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.directon = directon;
+        this.group = group;
         this.tankFrame = tankFrame;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -88,6 +98,7 @@ public class Bullet {
      * @param tank 敌方坦克
      */
     public void collideWith(Tank tank) {
+        if(this.group == tank.getGroup()) return;
         Rectangle rectBullet = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
         Rectangle rectTank = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
         if(rectBullet.intersects(rectTank)){

@@ -20,12 +20,14 @@ public class Tank {
     private boolean moving = true;//坦克是否移动
     private boolean living = true;
     private Random random = new Random();
+    private Group group = Group.BAD;
     private TankFrame tankframe;
 
-    public Tank(int x, int y, int speed,TankFrame tankframe) {
+    public Tank(int x, int y, int speed,Group group,TankFrame tankframe) {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.group = group;
         this.tankframe = tankframe;
     }
 
@@ -67,6 +69,14 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     /**
@@ -137,7 +147,7 @@ public class Tank {
     public void fire() {
         int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankframe.bulletList.add(new Bullet(bx,by,10,this.directon,this.tankframe));
+        tankframe.bulletList.add(new Bullet(bx,by,10,this.directon,this.group,this.tankframe));
     }
 
     public void die() {

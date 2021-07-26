@@ -13,7 +13,7 @@ public class Main {
 
         //增加敌方坦克
         for (int i = 0; i < 10; i++) {
-            tf.enemyList.add(new Tank(i*80,50,10,tf));
+            tf.enemyList.add(new Tank(i*80,50,2,Group.BAD,tf));
         }
 
         while(true){
