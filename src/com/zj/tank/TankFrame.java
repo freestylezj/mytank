@@ -42,7 +42,7 @@ public class TankFrame extends Frame {
         g.drawString("子弹数量："+bulletList.size(),10,60);
         g.setColor(c);
         myTank.paint(g);
-        /* 会发生 java.util.ConcurrentModificationException
+        /*会发生 java.util.ConcurrentModificationException
         for (Bullet bullet:bulletList) {
             bullet.paint(g);
         }
