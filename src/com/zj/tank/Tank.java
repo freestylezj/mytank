@@ -1,5 +1,7 @@
 package com.zj.tank;
 
+import com.zj.tank.util.ResourceMgr;
+
 import java.awt.*;
 
 /**
@@ -68,10 +70,29 @@ public class Tank {
      * @param g
      */
     public void paint(Graphics g) {
+        /* 20210726采用坦克图片替代黄色矩形
         Color c = g.getColor();
         g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 50);
         g.setColor(c);
+        */
+        switch (directon){
+            case UP:
+                g.drawImage(ResourceMgr.tankU,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD,x,y,null);
+                break;
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR,x,y,null);
+                break;
+            default:
+                break;
+        }
+
         move();
     }
 
