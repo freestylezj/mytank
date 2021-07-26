@@ -47,7 +47,7 @@ public class TankFrame extends Frame {
             bullet.paint(g);
         }
         */
-        /* 该方案也是可以的
+        /* 该方案以及下面的size()遍历也是可以的
         for(Iterator<Bullet> it = bulletList.iterator(); it.hasNext();){
             Bullet bullet = it.next();
             if(!bullet.live){
