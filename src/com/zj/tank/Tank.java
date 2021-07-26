@@ -3,6 +3,7 @@ package com.zj.tank;
 import com.zj.tank.util.ResourceMgr;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @Auther: zhongj
@@ -18,6 +19,7 @@ public class Tank {
     private Direction directon = Direction.DOWN;//坦克移动方向
     private boolean moving = true;//坦克是否移动
     private boolean living = true;
+    private Random random = new Random();
     private TankFrame tankframe;
 
     public Tank(int x, int y, int speed,TankFrame tankframe) {
@@ -122,6 +124,10 @@ public class Tank {
                 break;
             default:
                 break;
+        }
+
+        if(random.nextInt(10)>8){
+            this.fire();
         }
     }
 
