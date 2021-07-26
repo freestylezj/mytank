@@ -68,7 +68,7 @@ public class TankFrame extends Frame {
             Tank enemyTank = it.next();
             enemyTank.paint(g);
         }
-
+        //子弹碰撞坦克
         for (int i = 0; i < bulletList.size(); i++) {
             for (int j = 0; j < enemyList.size(); j++) {
                 bulletList.get(i).collideWith(enemyList.get(j));

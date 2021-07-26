@@ -16,7 +16,7 @@ public class Tank {
     private int x, y;
     private int speed;//坦克移动速度
     private Direction directon = Direction.DOWN;//坦克移动方向
-    private boolean moving = false;//坦克是否移动
+    private boolean moving = true;//坦克是否移动
     private boolean living = true;
     private TankFrame tankframe;
 
