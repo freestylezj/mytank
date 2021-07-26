@@ -11,6 +11,8 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Tank {
+    static final int WIDTH = ResourceMgr.tankD.getWidth();
+    static final int HEIGHT = ResourceMgr.tankD.getHeight();
     private int x, y;
     private int speed;//坦克移动速度
     private Direction directon = Direction.DOWN;//坦克移动方向
@@ -123,6 +125,8 @@ public class Tank {
      * 坦克开火
      */
     public void fire() {
-        tankframe.bulletList.add(new Bullet(this.x,this.y,10,this.directon,this.tankframe));
+        int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+        tankframe.bulletList.add(new Bullet(bx,by,10,this.directon,this.tankframe));
     }
 }

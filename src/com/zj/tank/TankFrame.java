@@ -98,6 +98,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_RIGHT:
                     bright = true;
                     break;
+                case KeyEvent.VK_CONTROL:
+                    myTank.fire();
+                    break;
                 default:
                     break;
             }
@@ -120,9 +123,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_RIGHT:
                     bright = false;
                     break;
-                case KeyEvent.VK_CONTROL:
+                /*case KeyEvent.VK_CONTROL:
                     myTank.fire();
-                    break;
+                    break;*/
                 default:
                     break;
             }
