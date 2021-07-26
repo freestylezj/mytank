@@ -14,12 +14,15 @@ public class Bullet {
     private int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
+    private Boolean live = true;//是否存活
+    private TankFrame tankFrame;
 
-    public Bullet(int x, int y, int speed, Direction directon) {
+    public Bullet(int x, int y, int speed, Direction directon,TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.directon = directon;
+        this.tankFrame = tankFrame;
     }
 
     public void paint(Graphics g) {
@@ -34,6 +37,9 @@ public class Bullet {
      * 子弹的移动
      */
     private void move() {
+        if(!live){
+            tankFrame.bulletList.remove(this);
+        }
         switch (directon) {
             case UP:
                 y -= speed;
@@ -49,6 +55,10 @@ public class Bullet {
                 break;
             default:
                 break;
+        }
+
+        if(x<0||y<0||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
+            live = false;
         }
     }
 

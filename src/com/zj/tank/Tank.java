@@ -102,6 +102,6 @@ public class Tank {
      * 坦克开火
      */
     public void fire() {
-        tankframe.bulletList.add(new Bullet(this.x,this.y,10,this.directon));
+        tankframe.bulletList.add(new Bullet(this.x,this.y,10,this.directon,this.tankframe));
     }
 }
