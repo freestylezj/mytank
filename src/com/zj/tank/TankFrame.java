@@ -16,7 +16,7 @@ import java.util.Iterator;
  */
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    private Tank myTank = new Tank(200, 200, 20,this);
+    private Tank myTank = new Tank(200, 200, 20, this);
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 
     public TankFrame() {
@@ -39,7 +39,7 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹数量："+bulletList.size(),10,60);
+        g.drawString("子弹数量：" + bulletList.size(), 10, 60);
         g.setColor(c);
         myTank.paint(g);
         /*会发生 java.util.ConcurrentModificationException
@@ -64,18 +64,19 @@ public class TankFrame extends Frame {
     }
 
     Image offScreenImage = null;
+
     @Override
     public void update(Graphics g) {
-        if(offScreenImage == null){
-            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.BLACK);
-        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);
-        g.drawImage(offScreenImage,0,0,null);
+        g.drawImage(offScreenImage, 0, 0, null);
     }
 
     class MyKeyListener extends KeyAdapter {
