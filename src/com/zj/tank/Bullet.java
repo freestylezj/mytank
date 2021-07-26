@@ -99,7 +99,7 @@ public class Bullet {
      */
     public void collideWith(Tank tank) {
         if(this.group == tank.getGroup()) return;
-        //TODO:使用同一个rect来判断是否相交
+        //TODO : 使用同一个rect来判断是否相交
         Rectangle rectBullet = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
         Rectangle rectTank = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
         if(rectBullet.intersects(rectTank)){
