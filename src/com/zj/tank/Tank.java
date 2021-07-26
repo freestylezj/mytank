@@ -17,6 +17,7 @@ public class Tank {
     private int speed;//坦克移动速度
     private Direction directon = Direction.DOWN;//坦克移动方向
     private boolean moving = false;//坦克是否移动
+    private boolean living = true;
     private TankFrame tankframe;
 
     public Tank(int x, int y, int speed,TankFrame tankframe) {
@@ -72,6 +73,9 @@ public class Tank {
      * @param g
      */
     public void paint(Graphics g) {
+        if(!living){
+            tankframe.enemyList.remove(this) ;
+        }
         /* 20210726采用坦克图片替代黄色矩形
         Color c = g.getColor();
         g.setColor(Color.YELLOW);
@@ -128,5 +132,9 @@ public class Tank {
         int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         tankframe.bulletList.add(new Bullet(bx,by,10,this.directon,this.tankframe));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }

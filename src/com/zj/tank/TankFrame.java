@@ -18,6 +18,7 @@ public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     private Tank myTank = new Tank(200, 200, 20, this);
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+    ArrayList<Tank> enemyList = new ArrayList<Tank>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -40,6 +41,7 @@ public class TankFrame extends Frame {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("子弹数量：" + bulletList.size(), 10, 60);
+        g.drawString("坦克数量：" + enemyList.size(), 10, 80);
         g.setColor(c);
         myTank.paint(g);
         /*会发生 java.util.ConcurrentModificationException
@@ -57,10 +59,21 @@ public class TankFrame extends Frame {
             }
         }
         */
+        //画出子弹
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
+        //画出敌方坦克
+        for(Iterator<Tank> it = enemyList.iterator();it.hasNext();){
+            Tank enemyTank = it.next();
+            enemyTank.paint(g);
+        }
 
+        for (int i = 0; i < bulletList.size(); i++) {
+            for (int j = 0; j < enemyList.size(); j++) {
+                bulletList.get(i).collideWith(enemyList.get(j));
+            }
+        }
     }
 
     Image offScreenImage = null;

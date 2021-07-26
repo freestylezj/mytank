@@ -16,7 +16,7 @@ public class Bullet {
     private int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
-    Boolean live = true;//是否存活
+    Boolean living = true;//是否存活
     private TankFrame tankFrame;
 
     public Bullet(int x, int y, int speed, Direction directon,TankFrame tankFrame) {
@@ -58,7 +58,7 @@ public class Bullet {
      * 子弹的移动
      */
     private void move() {
-        if(!live){
+        if(!living){
             tankFrame.bulletList.remove(this);
         }
         switch (directon) {
@@ -79,9 +79,24 @@ public class Bullet {
         }
 
         if(x<0||y<0||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
-            live = false;
+            living = false;
         }
     }
 
+    /**
+     * 子弹消灭敌方坦克
+     * @param tank 敌方坦克
+     */
+    public void collideWith(Tank tank) {
+        Rectangle rectBullet = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+        Rectangle rectTank = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
+        if(rectBullet.intersects(rectTank)){
+            this.die();
+            tank.die();
+        }
+    }
 
+    private void die() {
+        this.living = false;
+    }
 }
