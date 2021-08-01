@@ -19,6 +19,7 @@ public class TankFrame extends Frame {
     private Tank myTank = new Tank(200, 200, 20, Group.GOOOD,this);
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     ArrayList<Tank> enemyList = new ArrayList<Tank>();
+    Explode explode = new Explode(60,60,this);
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -49,7 +50,7 @@ public class TankFrame extends Frame {
             bullet.paint(g);
         }
         */
-        /* 该方案以及下面的size()遍历也是可以的
+        /* 会发生 java.util.ConcurrentModificationException
         for(Iterator<Bullet> it = bulletList.iterator(); it.hasNext();){
             Bullet bullet = it.next();
             if(!bullet.live){
@@ -64,9 +65,13 @@ public class TankFrame extends Frame {
             bulletList.get(i).paint(g);
         }
         //画出敌方坦克
+        /* //会发生 java.util.ConcurrentModificationException
         for(Iterator<Tank> it = enemyList.iterator();it.hasNext();){
             Tank enemyTank = it.next();
             enemyTank.paint(g);
+        }*/
+        for (int i = 0; i < enemyList.size(); i++) {
+            enemyList.get(i).paint(g);
         }
         //子弹碰撞坦克
         for (int i = 0; i < bulletList.size(); i++) {
@@ -74,6 +79,7 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collideWith(enemyList.get(j));
             }
         }
+        explode.paint(g);
     }
 
     Image offScreenImage = null;
