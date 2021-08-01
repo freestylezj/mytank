@@ -148,6 +148,19 @@ public class Tank {
         //敌人坦克随机改变方向
         if (this.group == Group.BAD && random.nextInt(100) > 95)
             randomDir();
+
+        //边界检测
+        boundsCheck();
+    }
+
+    /**
+     * 边界检测
+     */
+    private void boundsCheck() {
+        if(x<0) x=2;
+        if(x>TankFrame.GAME_WIDTH - Tank.WIDTH -2) x=TankFrame.GAME_WIDTH - Tank.WIDTH -2;
+        if(y<28) y=28;
+        if(y>TankFrame.GAME_HEIGHT - Tank.HEIGHT -2) y=TankFrame.GAME_HEIGHT - Tank.HEIGHT -2;
     }
 
     /**
