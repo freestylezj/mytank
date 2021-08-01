@@ -20,7 +20,7 @@ public class Bullet {
     private Group group = Group.BAD;
     private TankFrame tankFrame;
 
-    public Bullet(int x, int y, int speed, Direction directon,Group group,TankFrame tankFrame) {
+    public Bullet(int x, int y, int speed, Direction directon, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.speed = speed;
@@ -44,18 +44,18 @@ public class Bullet {
         g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(c);//还原为初始颜色
         */
-        switch (directon){
+        switch (directon) {
             case UP:
-                g.drawImage(ResourceMgr.bulletU,x,y,null);
+                g.drawImage(ResourceMgr.bulletU, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.bulletD,x,y,null);
+                g.drawImage(ResourceMgr.bulletD, x, y, null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.bulletL,x,y,null);
+                g.drawImage(ResourceMgr.bulletL, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.bulletR,x,y,null);
+                g.drawImage(ResourceMgr.bulletR, x, y, null);
                 break;
             default:
                 break;
@@ -68,7 +68,7 @@ public class Bullet {
      * 子弹的移动
      */
     private void move() {
-        if(!living){
+        if (!living) {
             tankFrame.bulletList.remove(this);
         }
         switch (directon) {
@@ -88,24 +88,27 @@ public class Bullet {
                 break;
         }
 
-        if(x<0||y<0||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
     }
 
     /**
      * 子弹消灭敌方坦克
+     *
      * @param tank 敌方坦克
      */
     public void collideWith(Tank tank) {
-        if(this.group == tank.getGroup()) return;
+        if (this.group == tank.getGroup()) return;
         //TODO : 使用同一个rect来判断是否相交
-        Rectangle rectBullet = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
-        Rectangle rectTank = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
-        if(rectBullet.intersects(rectTank)){
+        Rectangle rectBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rectTank = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
+        if (rectBullet.intersects(rectTank)) {
             this.die();
             tank.die();
-            tankFrame.explodes.add(new Explode(x,y,tankFrame));
+            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+            tankFrame.explodes.add(new Explode(ex, ey, tankFrame));
         }
     }
 
