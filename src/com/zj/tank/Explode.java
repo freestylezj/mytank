@@ -22,15 +22,15 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tankFrame = tankFrame;
+        new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
-//        for (int i = 0; i < 16; i++) {
-            g.drawImage(ResourceMgr.explodes[step++],x,y,WIDTH,HEIGHT,null);
-            if(step>=ResourceMgr.explodes.length){
-                step = 0;
-            }
-//        }
+        g.drawImage(ResourceMgr.explodes[step++],x,y,WIDTH,HEIGHT,null);
+        if(step>=ResourceMgr.explodes.length){
+            tankFrame.explodes.remove(this);
+        }
+
     }
 
 }

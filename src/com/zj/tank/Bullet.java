@@ -105,6 +105,7 @@ public class Bullet {
         if(rectBullet.intersects(rectTank)){
             this.die();
             tank.die();
+            tankFrame.explodes.add(new Explode(x,y,tankFrame));
         }
     }
 

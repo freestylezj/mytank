@@ -12,12 +12,12 @@ public class Main {
         TankFrame tf = new TankFrame();
 
         //增加敌方坦克
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             tf.enemyList.add(new Tank(i*80,50,2,Group.BAD,tf));
         }
 
         //播放背景音效
-        new Thread(()->new Audio("audio/war1.wav").loop()).start();
+//        new Thread(()->new Audio("audio/war1.wav").loop()).start();
 
         while(true){
            Thread.sleep(25);

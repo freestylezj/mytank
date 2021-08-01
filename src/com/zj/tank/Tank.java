@@ -136,9 +136,12 @@ public class Tank {
                 break;
         }
 
-        if(random.nextInt(10)>8){
+        if(random.nextInt(100)>95 && this.group == Group.BAD){
             this.fire();
         }
+
+        if(this.group == Group.GOOOD)
+            new Thread(()->new Audio("audio/tank_move.wav").play()).start();
     }
 
     /**
@@ -147,7 +150,10 @@ public class Tank {
     public void fire() {
         int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankframe.bulletList.add(new Bullet(bx,by,10,this.directon,this.group,this.tankframe));
+        tankframe.bulletList.add(new Bullet(bx,by,6,this.directon,this.group,this.tankframe));
+        if(this.group == Group.GOOOD){
+            new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        }
     }
 
     public void die() {

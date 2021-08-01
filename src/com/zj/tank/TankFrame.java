@@ -19,7 +19,7 @@ public class TankFrame extends Frame {
     private Tank myTank = new Tank(200, 200, 10, Group.GOOOD,this);
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     ArrayList<Tank> enemyList = new ArrayList<Tank>();
-    Explode explode = new Explode(60,60,this);
+    ArrayList<Explode> explodes = new ArrayList<Explode>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -43,6 +43,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹数量：" + bulletList.size(), 10, 60);
         g.drawString("坦克数量：" + enemyList.size(), 10, 80);
+        g.drawString("爆炸数量：" + explodes.size(), 10, 100);
         g.setColor(c);
         myTank.paint(g);
         /*会发生 java.util.ConcurrentModificationException
@@ -64,12 +65,12 @@ public class TankFrame extends Frame {
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
-        //画出敌方坦克
         /* //会发生 java.util.ConcurrentModificationException
         for(Iterator<Tank> it = enemyList.iterator();it.hasNext();){
             Tank enemyTank = it.next();
             enemyTank.paint(g);
         }*/
+        //画出敌方坦克
         for (int i = 0; i < enemyList.size(); i++) {
             enemyList.get(i).paint(g);
         }
@@ -79,7 +80,10 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collideWith(enemyList.get(j));
             }
         }
-        explode.paint(g);
+        //画出爆炸
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
     }
 
     Image offScreenImage = null;
@@ -117,9 +121,6 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_RIGHT:
                     bright = true;
                     break;
-                case KeyEvent.VK_CONTROL:
-                    myTank.fire();
-                    break;
                 default:
                     break;
             }
@@ -142,9 +143,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_RIGHT:
                     bright = false;
                     break;
-                /*case KeyEvent.VK_CONTROL:
+                case KeyEvent.VK_CONTROL:
                     myTank.fire();
-                    break;*/
+                    break;
                 default:
                     break;
             }
