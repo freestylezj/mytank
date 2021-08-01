@@ -23,7 +23,7 @@ public class Tank {
     private Group group = Group.BAD;
     private TankFrame tankframe;
 
-    public Tank(int x, int y, int speed,Group group,TankFrame tankframe) {
+    public Tank(int x, int y, int speed, Group group, TankFrame tankframe) {
         this.x = x;
         this.y = y;
         this.speed = speed;
@@ -85,8 +85,8 @@ public class Tank {
      * @param g
      */
     public void paint(Graphics g) {
-        if(!living){
-            tankframe.enemyList.remove(this) ;
+        if (!living) {
+            tankframe.enemyList.remove(this);
         }
         /* 20210726采用坦克图片替代黄色矩形
         Color c = g.getColor();
@@ -94,18 +94,18 @@ public class Tank {
         g.fillRect(x, y, 50, 50);
         g.setColor(c);
         */
-        switch (directon){
+        switch (directon) {
             case UP:
-                g.drawImage(ResourceMgr.tankU,x,y,null);
+                g.drawImage(ResourceMgr.tankU, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD,x,y,null);
+                g.drawImage(ResourceMgr.tankD, x, y, null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(ResourceMgr.tankL, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR,x,y,null);
+                g.drawImage(ResourceMgr.tankR, x, y, null);
                 break;
             default:
                 break;
@@ -136,23 +136,36 @@ public class Tank {
                 break;
         }
 
-        if(random.nextInt(100)>95 && this.group == Group.BAD){
+        //开火
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
 
-        if(this.group == Group.GOOOD)
-            new Thread(()->new Audio("audio/tank_move.wav").play()).start();
+        //主战坦克音效
+        if (this.group == Group.GOOOD)
+            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
+
+        //敌人坦克随机改变方向
+        if (this.group == Group.BAD && random.nextInt(100) > 95)
+            randomDir();
+    }
+
+    /**
+     * 随机改变方向
+     */
+    private void randomDir() {
+        this.directon = Direction.values()[random.nextInt(4)];
     }
 
     /**
      * 坦克开火
      */
     public void fire() {
-        int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankframe.bulletList.add(new Bullet(bx,by,6,this.directon,this.group,this.tankframe));
-        if(this.group == Group.GOOOD){
-            new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        tankframe.bulletList.add(new Bullet(bx, by, 6, this.directon, this.group, this.tankframe));
+        if (this.group == Group.GOOOD) {
+            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
         }
     }
 
