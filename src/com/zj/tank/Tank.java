@@ -22,6 +22,7 @@ public class Tank {
     private Random random = new Random();
     private Group group = Group.BAD;
     private TankFrame tankframe;
+    Rectangle rect = new Rectangle();
 
     public Tank(int x, int y, int speed, Group group, TankFrame tankframe) {
         this.x = x;
@@ -29,6 +30,11 @@ public class Tank {
         this.speed = speed;
         this.group = group;
         this.tankframe = tankframe;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public int getX() {
@@ -151,6 +157,8 @@ public class Tank {
 
         //边界检测
         boundsCheck();
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     /**

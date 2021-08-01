@@ -19,6 +19,7 @@ public class Bullet {
     Boolean living = true;//是否存活
     private Group group = Group.BAD;
     private TankFrame tankFrame;
+    Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, int speed, Direction directon, Group group, TankFrame tankFrame) {
         this.x = x;
@@ -27,6 +28,11 @@ public class Bullet {
         this.directon = directon;
         this.group = group;
         this.tankFrame = tankFrame;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public Group getGroup() {
@@ -91,6 +97,9 @@ public class Bullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
+
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     /**
@@ -100,10 +109,7 @@ public class Bullet {
      */
     public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
-        //TODO : 使用同一个rect来判断是否相交
-        Rectangle rectBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rectTank = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
-        if (rectBullet.intersects(rectTank)) {
+        if (this.rect.intersects(tank.rect)) {
             this.die();
             tank.die();
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
