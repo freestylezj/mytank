@@ -16,7 +16,7 @@ import java.util.Iterator;
  */
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    private Tank myTank = new Tank(200, 200, 20, Group.GOOOD,this);
+    private Tank myTank = new Tank(200, 200, 10, Group.GOOOD,this);
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     ArrayList<Tank> enemyList = new ArrayList<Tank>();
     Explode explode = new Explode(60,60,this);

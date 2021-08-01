@@ -16,8 +16,11 @@ public class Main {
             tf.enemyList.add(new Tank(i*80,50,2,Group.BAD,tf));
         }
 
+        //播放背景音效
+        new Thread(()->new Audio("audio/war1.wav").loop()).start();
+
         while(true){
-           Thread.sleep(50);
+           Thread.sleep(25);
            tf.repaint();//自动调用 paint方法
         }
     }
