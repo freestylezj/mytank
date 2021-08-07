@@ -1,12 +1,14 @@
 package com.zj.tank;
 
+import com.zj.tank.enumeration.Direction;
+import com.zj.tank.enumeration.Group;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @Auther: zhongj

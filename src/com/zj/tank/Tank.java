@@ -1,5 +1,7 @@
 package com.zj.tank;
 
+import com.zj.tank.enumeration.Direction;
+import com.zj.tank.enumeration.Group;
 import com.zj.tank.util.ResourceMgr;
 
 import java.awt.*;

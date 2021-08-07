@@ -1,4 +1,4 @@
-package com.zj.tank;
+package com.zj.tank.enumeration;
 
 /**
  * @Auther: zhongj

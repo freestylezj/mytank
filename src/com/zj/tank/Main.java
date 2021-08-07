@@ -1,7 +1,7 @@
 package com.zj.tank;
 
+import com.zj.tank.enumeration.Group;
 import com.zj.tank.util.PropertyMgr;
-import com.zj.tank.util.PropertyMgr_Singleton;
 
 /**
  * @Auther: zhongj
@@ -17,7 +17,7 @@ public class Main {
 
         //增加敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            tf.enemyList.add(new Tank(i*80,50,2,Group.BAD,tf));
+            tf.enemyList.add(new Tank(i*80,50,2, Group.BAD,tf));
         }
 
         //播放背景音效
