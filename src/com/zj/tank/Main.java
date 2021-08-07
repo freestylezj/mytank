@@ -1,6 +1,7 @@
 package com.zj.tank;
 
 import com.zj.tank.util.PropertyMgr;
+import com.zj.tank.util.PropertyMgr_Singleton;
 
 /**
  * @Auther: zhongj
