@@ -2,9 +2,14 @@ package com.zj.tank;
 
 import com.zj.tank.enumeration.Direction;
 import com.zj.tank.enumeration.Group;
+import com.zj.tank.strategy.DefaultTankFireStrategy;
+import com.zj.tank.strategy.FourDirsTankFireStrategy;
+import com.zj.tank.strategy.TankFireStrategy;
+import com.zj.tank.util.PropertyMgr;
 import com.zj.tank.util.ResourceMgr;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 /**
@@ -14,17 +19,18 @@ import java.util.Random;
  * @version: 1.0
  */
 public class Tank {
-    static final int WIDTH = ResourceMgr.goodTankD.getWidth();
-    static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
-    private int x, y;
-    private int speed;//坦克移动速度
-    private Direction directon = Direction.DOWN;//坦克移动方向
-    private boolean moving = true;//坦克是否移动
-    private boolean living = true;
-    private Random random = new Random();
-    private Group group = Group.BAD;
-    private TankFrame tankframe;
+    public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
+    public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
+    public int x, y;
+    public int speed;//坦克移动速度
+    public Direction directon = Direction.DOWN;//坦克移动方向
+    public boolean moving = true;//坦克是否移动
+    public boolean living = true;
+    public Random random = new Random();
+    public Group group = Group.BAD;
+    public TankFrame tankframe;
     Rectangle rect = new Rectangle();
+    TankFireStrategy tfs ;
 
     public Tank(int x, int y, int speed, Group group, TankFrame tankframe) {
         this.x = x;
@@ -150,8 +156,8 @@ public class Tank {
         }
 
         //主战坦克音效
-        if (this.group == Group.GOOOD)
-            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
+//        if (this.group == Group.GOOOD)
+//            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
 
         //敌人坦克随机改变方向
         if (this.group == Group.BAD && random.nextInt(100) > 95)
@@ -184,12 +190,19 @@ public class Tank {
      * 坦克开火
      */
     public void fire() {
-        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankframe.bulletList.add(new Bullet(bx, by, 6, this.directon, this.group, this.tankframe));
-        if (this.group == Group.GOOOD) {
-            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-        }
+        if(this.group == Group.GOOOD){
+            try {
+                tfs = (TankFireStrategy) Class.forName((String)PropertyMgr.get("goodTFS")).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                tfs = (TankFireStrategy) Class.forName((String)PropertyMgr.get("badTFS")).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }        }
+        tfs.fire(this);
     }
 
     public void die() {

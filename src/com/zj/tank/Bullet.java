@@ -13,9 +13,9 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Bullet {
-    static final int WIDTH = ResourceMgr.bulletD.getWidth();
-    static final int HEIGHT = ResourceMgr.bulletD.getHeight();
-    private int x, y;//坐标
+    public static final int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
     Boolean living = true;//是否存活

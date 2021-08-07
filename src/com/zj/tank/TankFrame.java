@@ -2,6 +2,7 @@ package com.zj.tank;
 
 import com.zj.tank.enumeration.Direction;
 import com.zj.tank.enumeration.Group;
+import com.zj.tank.util.PropertyMgr;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = Integer.parseInt((String)PropertyMgr.get("GAME_WIDTH")), GAME_HEIGHT = Integer.parseInt((String)PropertyMgr.get("GAME_HEIGHT"));
     private Tank myTank = new Tank(200, 200, 10, Group.GOOOD,this);
-    ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+    public ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     ArrayList<Tank> enemyList = new ArrayList<Tank>();
     ArrayList<Explode> explodes = new ArrayList<Explode>();
 
