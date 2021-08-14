@@ -20,16 +20,16 @@ public class Bullet {
     private Direction directon;//方向
     Boolean living = true;//是否存活
     private Group group = Group.BAD;
-    private TankFrame tankFrame;
+    private GameModel gm;
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, int speed, Direction directon, Group group, TankFrame tankFrame) {
+    public Bullet(int x, int y, int speed, Direction directon, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.directon = directon;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -77,7 +77,7 @@ public class Bullet {
      */
     private void move() {
         if (!living) {
-            tankFrame.bulletList.remove(this);
+            gm.bulletList.remove(this);
         }
         switch (directon) {
             case UP:
@@ -116,7 +116,7 @@ public class Bullet {
             tank.die();
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tankFrame.explodes.add(new Explode(ex, ey, tankFrame));
+            gm.explodes.add(new Explode(ex, ey, gm));
         }
     }
 

@@ -28,16 +28,16 @@ public class Tank {
     public boolean living = true;
     public Random random = new Random();
     public Group group = Group.BAD;
-    public TankFrame tankframe;
+    public GameModel gm;
     Rectangle rect = new Rectangle();
     TankFireStrategy tfs ;
 
-    public Tank(int x, int y, int speed, Group group, TankFrame tankframe) {
+    public Tank(int x, int y, int speed, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.group = group;
-        this.tankframe = tankframe;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -100,7 +100,7 @@ public class Tank {
      */
     public void paint(Graphics g) {
         if (!living) {
-            tankframe.enemyList.remove(this);
+            gm.enemyList.remove(this);
         }
         /* 20210726采用坦克图片替代黄色矩形
         Color c = g.getColor();

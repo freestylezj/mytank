@@ -16,19 +16,19 @@ public class Explode {
     private int x, y;//坐标
     Boolean living = true;//是否存活
     private int step = 0;
-    private TankFrame tankFrame;
+    private GameModel gm;
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++],x,y,WIDTH,HEIGHT,null);
         if(step>=ResourceMgr.explodes.length){
-            tankFrame.explodes.remove(this);
+            gm.explodes.remove(this);
         }
 
     }

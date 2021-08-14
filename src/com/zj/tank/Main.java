@@ -13,12 +13,6 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("程序入口...坦克大战即将开始...");
         TankFrame tf = new TankFrame();
-        int initEnemyTankCount = Integer.parseInt((String)PropertyMgr.get("initEnemyTankCount"));
-
-        //增加敌方坦克
-        for (int i = 0; i < initEnemyTankCount; i++) {
-            tf.enemyList.add(new Tank(i*80,50,2, Group.BAD,tf));
-        }
 
         //播放背景音效
 //        new Thread(()->new Audio("audio/war1.wav").loop()).start();
