@@ -16,20 +16,20 @@ import java.util.ArrayList;
  * @version: 1.0
  */
 public class GameModel {
-    private Tank myTank = new Tank(200, 200, 10, Group.GOOOD,this);
+    private Tank myTank = new Tank(200, 200, 10, Group.GOOOD, this);
     public ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     ArrayList<Tank> enemyList = new ArrayList<Tank>();
     ArrayList<Explode> explodes = new ArrayList<Explode>();
 
-    public GameModel(){
+    public GameModel() {
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.get("initEnemyTankCount"));
         //增加敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            enemyList.add(new Tank(i*80,50,2, Group.BAD,this));
+            enemyList.add(new Tank(i * 80, 50, 2, Group.BAD, this));
         }
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("子弹数量：" + bulletList.size(), 10, 60);
