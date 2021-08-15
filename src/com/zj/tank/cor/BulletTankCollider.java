@@ -8,7 +8,7 @@ import com.zj.tank.Tank;
 /**
  * @Auther: zhongj
  * @Date: 2021/8/15 - 08 - 15 - 16:04
- * @Description: 子弹坦克碰撞器
+ * @Description: 子弹与坦克碰撞器
  * @version: 1.0
  */
 public class BulletTankCollider implements Collider {

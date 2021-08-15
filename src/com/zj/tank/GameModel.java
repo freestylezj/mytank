@@ -2,6 +2,8 @@ package com.zj.tank;
 
 import com.zj.tank.cor.BulletTankCollider;
 import com.zj.tank.cor.Collider;
+import com.zj.tank.cor.ColliderChain;
+import com.zj.tank.cor.TankTankCollider;
 import com.zj.tank.enumeration.Direction;
 import com.zj.tank.enumeration.Group;
 import com.zj.tank.util.PropertyMgr;
@@ -21,7 +23,7 @@ import java.util.List;
 public class GameModel {
     public List<GameObject> objects = new ArrayList<>();
     private Tank myTank = new Tank(200, 200, 10, Group.GOOOD, this);
-    Collider btCollider = new BulletTankCollider();
+    ColliderChain colliderChain = new ColliderChain();
 
     public GameModel() {
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.get("initEnemyTankCount"));
@@ -66,10 +68,12 @@ public class GameModel {
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).paint(g);
         }
-        //子弹碰撞坦克
+        //碰撞检测
         for (int i = 0; i < objects.size(); i++) {
             for (int j = i+1; j < objects.size(); j++) {
-                btCollider.collide(objects.get(i),objects.get(j));
+                GameObject o1 = objects.get(i);
+                GameObject o2 = objects.get(j);
+                colliderChain.collide(o1,o2);
             }
         }
 

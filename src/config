@@ -4,3 +4,4 @@ GAME_WIDTH=1000
 GAME_HEIGHT=600
 goodTFS=com.zj.tank.strategy.FourDirsTankFireStrategy
 badTFS=com.zj.tank.strategy.DefaultTankFireStrategy
+colliders=com.zj.tank.cor.BulletTankCollider,com.zj.tank.cor.TankTankCollider

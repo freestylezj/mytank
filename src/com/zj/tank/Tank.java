@@ -208,4 +208,24 @@ public class Tank extends GameObject{
     public void die() {
         this.living = false;
     }
+
+    public void changeDirection(Tank tank) {
+        Direction dir = tank.directon;
+        switch (dir){
+            case UP:
+                tank.directon = Direction.DOWN;
+                break;
+            case DOWN:
+                tank.directon = Direction.UP;
+                break;
+            case LEFT:
+                tank.directon = Direction.RIGHT;
+                break;
+            case RIGHT:
+                tank.directon = Direction.LEFT;
+                break;
+            default:
+                break;
+        }
+    }
 }
