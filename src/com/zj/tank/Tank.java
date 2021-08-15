@@ -18,7 +18,7 @@ import java.util.Random;
  * @Description: 坦克
  * @version: 1.0
  */
-public class Tank {
+public class Tank extends GameObject{
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
     public int x, y;
@@ -29,7 +29,7 @@ public class Tank {
     public Random random = new Random();
     public Group group = Group.BAD;
     public GameModel gm;
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
     TankFireStrategy tfs ;
 
     public Tank(int x, int y, int speed, Group group, GameModel gm) {
@@ -100,7 +100,7 @@ public class Tank {
      */
     public void paint(Graphics g) {
         if (!living) {
-            gm.enemyList.remove(this);
+            gm.removeGo(this);
         }
         /* 20210726采用坦克图片替代黄色矩形
         Color c = g.getColor();

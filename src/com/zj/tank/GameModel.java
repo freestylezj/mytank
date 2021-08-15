@@ -1,5 +1,7 @@
 package com.zj.tank;
 
+import com.zj.tank.cor.BulletTankCollider;
+import com.zj.tank.cor.Collider;
 import com.zj.tank.enumeration.Direction;
 import com.zj.tank.enumeration.Group;
 import com.zj.tank.util.PropertyMgr;
@@ -8,6 +10,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: zhongj
@@ -16,25 +19,32 @@ import java.util.ArrayList;
  * @version: 1.0
  */
 public class GameModel {
+    public List<GameObject> objects = new ArrayList<>();
     private Tank myTank = new Tank(200, 200, 10, Group.GOOOD, this);
-    public ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
-    ArrayList<Tank> enemyList = new ArrayList<Tank>();
-    ArrayList<Explode> explodes = new ArrayList<Explode>();
+    Collider btCollider = new BulletTankCollider();
 
     public GameModel() {
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.get("initEnemyTankCount"));
         //增加敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            enemyList.add(new Tank(i * 80, 50, 2, Group.BAD, this));
+            objects.add(new Tank(i * 80, 50, 2, Group.BAD, this));
         }
+    }
+
+    public void addGo(GameObject go){
+        this.objects.add(go);
+    }
+
+    public void removeGo(GameObject go){
+        this.objects.remove(go);
     }
 
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹数量：" + bulletList.size(), 10, 60);
-        g.drawString("坦克数量：" + enemyList.size(), 10, 80);
-        g.drawString("爆炸数量：" + explodes.size(), 10, 100);
+//        g.drawString("子弹数量：" + bulletList.size(), 10, 60);
+//        g.drawString("坦克数量：" + enemyList.size(), 10, 80);
+//        g.drawString("爆炸数量：" + explodes.size(), 10, 100);
         g.setColor(c);
         myTank.paint(g);
         /*会发生 java.util.ConcurrentModificationException
@@ -52,29 +62,17 @@ public class GameModel {
             }
         }
         */
-        //画出子弹
-        for (int i = 0; i < bulletList.size(); i++) {
-            bulletList.get(i).paint(g);
-        }
-        /* //会发生 java.util.ConcurrentModificationException
-        for(Iterator<Tank> it = enemyList.iterator();it.hasNext();){
-            Tank enemyTank = it.next();
-            enemyTank.paint(g);
-        }*/
-        //画出敌方坦克
-        for (int i = 0; i < enemyList.size(); i++) {
-            enemyList.get(i).paint(g);
+        //画出游戏物体
+        for (int i = 0; i < objects.size(); i++) {
+            objects.get(i).paint(g);
         }
         //子弹碰撞坦克
-        for (int i = 0; i < bulletList.size(); i++) {
-            for (int j = 0; j < enemyList.size(); j++) {
-                bulletList.get(i).collideWith(enemyList.get(j));
+        for (int i = 0; i < objects.size(); i++) {
+            for (int j = i+1; j < objects.size(); j++) {
+                btCollider.collide(objects.get(i),objects.get(j));
             }
         }
-        //画出爆炸
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
+
     }
 
     class MyKeyListener extends KeyAdapter {

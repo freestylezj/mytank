@@ -12,16 +12,16 @@ import java.awt.*;
  * @Description: 子弹
  * @version: 1.0
  */
-public class Bullet {
+public class Bullet extends GameObject{
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
     public int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
     Boolean living = true;//是否存活
-    private Group group = Group.BAD;
-    private GameModel gm;
-    Rectangle rect = new Rectangle();
+    public Group group = Group.BAD;
+    public GameModel gm;
+    public Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, int speed, Direction directon, Group group, GameModel gm) {
         this.x = x;
@@ -77,7 +77,7 @@ public class Bullet {
      */
     private void move() {
         if (!living) {
-            gm.bulletList.remove(this);
+            gm.removeGo(this);
         }
         switch (directon) {
             case UP:
@@ -109,18 +109,19 @@ public class Bullet {
      *
      * @param tank 敌方坦克
      */
-    public void collideWith(Tank tank) {
-        if (this.group == tank.getGroup()) return;
-        if (this.rect.intersects(tank.rect)) {
-            this.die();
-            tank.die();
-            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.explodes.add(new Explode(ex, ey, gm));
-        }
-    }
+//    public void collideWith(Tank tank) {
+//        if (this.group == tank.getGroup()) return;
+//        if (this.rect.intersects(tank.rect)) {
+//            this.die();
+//            tank.die();
+//            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+//            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+//            gm.addGo(new Explode(ex, ey, gm));
+//        }
+//    }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
+
 }

@@ -10,9 +10,9 @@ import java.awt.*;
  * @Description: 爆炸
  * @version: 1.0
  */
-public class Explode {
-    static final int WIDTH = ResourceMgr.explodes[0].getWidth();
-    static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
+public class Explode extends GameObject{
+    public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
+    public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
     private int x, y;//坐标
     Boolean living = true;//是否存活
     private int step = 0;
@@ -28,7 +28,7 @@ public class Explode {
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++],x,y,WIDTH,HEIGHT,null);
         if(step>=ResourceMgr.explodes.length){
-            gm.explodes.remove(this);
+            gm.removeGo(this);
         }
 
     }
