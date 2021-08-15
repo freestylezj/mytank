@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * @Auther: zhongj
  * @Date: 2021/8/14 - 08 - 14 - 12:31
- * @Description: com.zj.tank
+ * @Description: model
  * @version: 1.0
  */
 public class GameModel {
