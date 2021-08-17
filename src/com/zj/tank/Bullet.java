@@ -20,16 +20,14 @@ public class Bullet extends GameObject{
     private Direction directon;//方向
     Boolean living = true;//是否存活
     public Group group = Group.BAD;
-    public GameModel gm;
     public Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, int speed, Direction directon, Group group, GameModel gm) {
+    public Bullet(int x, int y, int speed, Direction directon, Group group) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.directon = directon;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -77,7 +75,7 @@ public class Bullet extends GameObject{
      */
     private void move() {
         if (!living) {
-            gm.removeGo(this);
+            GameModel.getInstance().removeGo(this);
         }
         switch (directon) {
             case UP:
@@ -103,22 +101,6 @@ public class Bullet extends GameObject{
         rect.x = this.x;
         rect.y = this.y;
     }
-
-    /**
-     * 子弹消灭敌方坦克
-     *
-     * @param tank 敌方坦克
-     */
-//    public void collideWith(Tank tank) {
-//        if (this.group == tank.getGroup()) return;
-//        if (this.rect.intersects(tank.rect)) {
-//            this.die();
-//            tank.die();
-//            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-//            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-//            gm.addGo(new Explode(ex, ey, gm));
-//        }
-//    }
 
     public void die() {
         this.living = false;

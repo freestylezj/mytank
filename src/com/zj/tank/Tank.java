@@ -29,16 +29,14 @@ public class Tank extends GameObject {
     public boolean living = true;
     public Random random = new Random();
     public Group group = Group.BAD;
-    public GameModel gm;
     public Rectangle rect = new Rectangle();
     TankFireStrategy tfs;
 
-    public Tank(int x, int y, int speed, Group group, GameModel gm) {
+    public Tank(int x, int y, int speed, Group group) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -101,7 +99,7 @@ public class Tank extends GameObject {
      */
     public void paint(Graphics g) {
         if (!living) {
-            gm.removeGo(this);
+            GameModel.getInstance().removeGo(this);
         }
         /* 20210726采用坦克图片替代黄色矩形
         Color c = g.getColor();

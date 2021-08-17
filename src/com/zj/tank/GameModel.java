@@ -21,15 +21,21 @@ import java.util.List;
  * @version: 1.0
  */
 public class GameModel {
+    private static final GameModel INSTANCE = new GameModel();
+
     public List<GameObject> objects = new ArrayList<>();
-    private Tank myTank = new Tank(200, 200, 10, Group.GOOOD, this);
+    private Tank myTank = new Tank(200, 200, 10, Group.GOOOD);
     ColliderChain colliderChain = new ColliderChain();
 
-    public GameModel() {
+    public static GameModel getInstance(){
+        return INSTANCE;
+    }
+
+    private GameModel() {
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.get("initEnemyTankCount"));
         //增加敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            objects.add(new Tank(i * 80, 50, 2, Group.BAD, this));
+            objects.add(new Tank(i * 80, 50, 2, Group.BAD));
         }
 
         //初始化墙

@@ -19,7 +19,6 @@ import java.util.ArrayList;
  */
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = Integer.parseInt((String)PropertyMgr.get("GAME_WIDTH")), GAME_HEIGHT = Integer.parseInt((String)PropertyMgr.get("GAME_HEIGHT"));
-    public GameModel gm = new GameModel();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -27,7 +26,7 @@ public class TankFrame extends Frame {
         setTitle(" TANK - WAR ");
         setResizable(false);
 
-        addKeyListener(gm.new MyKeyListener());
+        addKeyListener(GameModel.getInstance().new MyKeyListener());
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -39,7 +38,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        gm.paint(g);
+        GameModel.getInstance().paint(g);
     }
 
     Image offScreenImage = null;

@@ -1,9 +1,6 @@
 package com.zj.tank.cor;
 
-import com.zj.tank.Bullet;
-import com.zj.tank.Explode;
-import com.zj.tank.GameObject;
-import com.zj.tank.Tank;
+import com.zj.tank.*;
 
 /**
  * @Auther: zhongj
@@ -31,7 +28,7 @@ public class BulletTankCollider implements Collider {
                 tank.die();
                 int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
                 int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-                bullet.gm.addGo(new Explode(ex, ey, bullet.gm));
+                GameModel.getInstance().addGo(new Explode(ex, ey));
             }
             return false;
         } else if (o1 instanceof Tank && o2 instanceof Bullet) {

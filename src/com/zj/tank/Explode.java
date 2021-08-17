@@ -16,19 +16,17 @@ public class Explode extends GameObject{
     private int x, y;//坐标
     Boolean living = true;//是否存活
     private int step = 0;
-    private GameModel gm;
 
-    public Explode(int x, int y, GameModel gm) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++],x,y,WIDTH,HEIGHT,null);
         if(step>=ResourceMgr.explodes.length){
-            gm.removeGo(this);
+            GameModel.getInstance().removeGo(this);
         }
 
     }

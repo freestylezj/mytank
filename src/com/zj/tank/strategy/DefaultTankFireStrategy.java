@@ -2,6 +2,7 @@ package com.zj.tank.strategy;
 
 import com.zj.tank.Audio;
 import com.zj.tank.Bullet;
+import com.zj.tank.GameModel;
 import com.zj.tank.Tank;
 import com.zj.tank.enumeration.Group;
 
@@ -16,7 +17,7 @@ public class DefaultTankFireStrategy implements TankFireStrategy{
     public void fire(Tank tank) {
         int bx = tank.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = tank.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tank.gm.addGo(new Bullet(bx, by, 6, tank.directon, tank.group, tank.gm));
+        GameModel.getInstance().addGo(new Bullet(bx, by, 6, tank.directon, tank.group));
         if (tank.group == Group.GOOOD) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
         }
