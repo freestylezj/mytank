@@ -26,8 +26,10 @@ public class TankTankCollider implements Collider {
             Tank tank1 = (Tank) o1;
             Tank tank2 = (Tank) o2;
             if (tank1.rect.intersects(tank2.rect)) {
-                tank1.changeDirection(tank1);
-                tank2.changeDirection(tank2);
+//                tank1.changeDirection(tank1);
+//                tank2.changeDirection(tank2);
+                tank1.back();
+                tank2.back();
             }
         }
         return true;

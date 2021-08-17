@@ -18,10 +18,11 @@ import java.util.Random;
  * @Description: 坦克
  * @version: 1.0
  */
-public class Tank extends GameObject{
+public class Tank extends GameObject {
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
     public int x, y;
+    public int oldX, oldY;
     public int speed;//坦克移动速度
     public Direction directon = Direction.DOWN;//坦克移动方向
     public boolean moving = true;//坦克是否移动
@@ -30,7 +31,7 @@ public class Tank extends GameObject{
     public Group group = Group.BAD;
     public GameModel gm;
     public Rectangle rect = new Rectangle();
-    TankFireStrategy tfs ;
+    TankFireStrategy tfs;
 
     public Tank(int x, int y, int speed, Group group, GameModel gm) {
         this.x = x;
@@ -133,6 +134,8 @@ public class Tank extends GameObject{
      */
     private void move() {
         if (!moving) return;
+        oldX = x;
+        oldY = y;
         switch (directon) {
             case UP:
                 y -= speed;
@@ -173,10 +176,10 @@ public class Tank extends GameObject{
      * 边界检测
      */
     private void boundsCheck() {
-        if(x<0) x=2;
-        if(x>TankFrame.GAME_WIDTH - Tank.WIDTH -2) x=TankFrame.GAME_WIDTH - Tank.WIDTH -2;
-        if(y<28) y=28;
-        if(y>TankFrame.GAME_HEIGHT - Tank.HEIGHT -2) y=TankFrame.GAME_HEIGHT - Tank.HEIGHT -2;
+        if (x < 0) x = 2;
+        if (x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
+        if (y < 28) y = 28;
+        if (y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
     }
 
     /**
@@ -190,18 +193,19 @@ public class Tank extends GameObject{
      * 坦克开火
      */
     public void fire() {
-        if(this.group == Group.GOOOD){
+        if (this.group == Group.GOOOD) {
             try {
-                tfs = (TankFireStrategy) Class.forName((String)PropertyMgr.get("goodTFS")).getDeclaredConstructor().newInstance();
+                tfs = (TankFireStrategy) Class.forName((String) PropertyMgr.get("goodTFS")).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             try {
-                tfs = (TankFireStrategy) Class.forName((String)PropertyMgr.get("badTFS")).getDeclaredConstructor().newInstance();
+                tfs = (TankFireStrategy) Class.forName((String) PropertyMgr.get("badTFS")).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
-            }        }
+            }
+        }
         tfs.fire(this);
     }
 
@@ -211,7 +215,7 @@ public class Tank extends GameObject{
 
     public void changeDirection(Tank tank) {
         Direction dir = tank.directon;
-        switch (dir){
+        switch (dir) {
             case UP:
                 tank.directon = Direction.DOWN;
                 break;
@@ -228,4 +232,10 @@ public class Tank extends GameObject{
                 break;
         }
     }
+
+    public void back() {
+        this.x = oldX;
+        this.y = oldY;
+    }
+
 }
