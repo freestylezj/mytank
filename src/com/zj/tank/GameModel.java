@@ -31,6 +31,13 @@ public class GameModel {
         for (int i = 0; i < initEnemyTankCount; i++) {
             objects.add(new Tank(i * 80, 50, 2, Group.BAD, this));
         }
+
+        //初始化墙
+        objects.add(new Wall(150,150,200,50));
+        objects.add(new Wall(550,150,200,50));
+        objects.add(new Wall(300,300,50,200));
+        objects.add(new Wall(550,300,50,200));
+
     }
 
     public void addGo(GameObject go){
@@ -76,7 +83,6 @@ public class GameModel {
                 colliderChain.collide(o1,o2);
             }
         }
-
     }
 
     class MyKeyListener extends KeyAdapter {
