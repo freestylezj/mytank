@@ -1,17 +1,16 @@
 package com.zj.tank.cor;
 
 import com.zj.tank.Bullet;
-import com.zj.tank.Explode;
 import com.zj.tank.GameObject;
 import com.zj.tank.Tank;
 
 /**
  * @Auther: zhongj
  * @Date: 2021/8/15 - 08 - 15 - 16:04
- * @Description: 坦克与坦克碰撞器
+ * @Description: 子弹与子弹碰撞器
  * @version: 1.0
  */
-public class TankTankCollider implements Collider {
+public class BulletBulletCollider implements Collider {
 
     /**
      * 碰撞检测
@@ -22,15 +21,14 @@ public class TankTankCollider implements Collider {
      */
     @Override
     public Boolean collide(GameObject o1, GameObject o2) {
-        if (o1 instanceof Tank && o2 instanceof Tank) {
-            Tank tank1 = (Tank) o1;
-            Tank tank2 = (Tank) o2;
-            if (tank1.rect.intersects(tank2.rect)) {
-//                tank1.changeDirection(tank1);
-//                tank2.changeDirection(tank2);
-                tank1.back();
-                tank2.back();
+        if (o1 instanceof Bullet && o2 instanceof Bullet) {
+            Bullet bullet1 = (Bullet) o1;
+            Bullet bullet2 = (Bullet) o2;
+            if (bullet1.rect.intersects(bullet2.rect)) {
+                bullet1.die();
+                bullet2.die();
             }
+            return false;
         }
         return true;
     }

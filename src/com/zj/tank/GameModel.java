@@ -23,8 +23,12 @@ import java.util.List;
 public class GameModel {
     private static final GameModel INSTANCE = new GameModel();
 
+    static {
+        INSTANCE.init();
+    }
+
+    Tank myTank ;
     public List<GameObject> objects = new ArrayList<>();
-    private Tank myTank = new Tank(200, 200, 10, Group.GOOOD);
     ColliderChain colliderChain = new ColliderChain();
 
     public static GameModel getInstance(){
@@ -32,18 +36,22 @@ public class GameModel {
     }
 
     private GameModel() {
+
+    }
+
+    private void  init(){
+        myTank = new Tank(200, 200, 10, Group.GOOOD);
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.get("initEnemyTankCount"));
         //增加敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            objects.add(new Tank(i * 80, 50, 2, Group.BAD));
+            new Tank(i * 80, 50, 2, Group.BAD);
         }
 
         //初始化墙
-        objects.add(new Wall(150,150,200,50));
-        objects.add(new Wall(550,150,200,50));
-        objects.add(new Wall(300,300,50,200));
-        objects.add(new Wall(550,300,50,200));
-
+        new Wall(150,150,200,50);
+        new Wall(550,150,200,50);
+        new Wall(300,300,50,200);
+        new Wall(550,300,50,200);
     }
 
     public void addGo(GameObject go){

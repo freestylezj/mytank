@@ -33,6 +33,8 @@ public class Bullet extends GameObject{
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        GameModel.getInstance().addGo(this);
     }
 
     public Group getGroup() {

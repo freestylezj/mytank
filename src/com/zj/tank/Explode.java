@@ -20,6 +20,9 @@ public class Explode extends GameObject{
     public Explode(int x, int y) {
         this.x = x;
         this.y = y;
+
+        GameModel.getInstance().addGo(this);
+
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
@@ -28,7 +31,6 @@ public class Explode extends GameObject{
         if(step>=ResourceMgr.explodes.length){
             GameModel.getInstance().removeGo(this);
         }
-
     }
 
 }
