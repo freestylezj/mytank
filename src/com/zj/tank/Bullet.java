@@ -12,10 +12,9 @@ import java.awt.*;
  * @Description: 子弹
  * @version: 1.0
  */
-public class Bullet extends GameObject{
+public class Bullet extends GameObject {
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
-    public int x, y;//坐标
     private int speed;//速度
     private Direction directon;//方向
     Boolean living = true;//是否存活
@@ -72,6 +71,16 @@ public class Bullet extends GameObject{
         move();
     }
 
+    @Override
+    public Integer getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public Integer getHeight() {
+        return HEIGHT;
+    }
+
     /**
      * 子弹的移动
      */
@@ -107,5 +116,6 @@ public class Bullet extends GameObject{
     public void die() {
         this.living = false;
     }
+
 
 }

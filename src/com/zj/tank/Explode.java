@@ -13,7 +13,6 @@ import java.awt.*;
 public class Explode extends GameObject{
     public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
-    private int x, y;//坐标
     Boolean living = true;//是否存活
     private int step = 0;
 
@@ -31,6 +30,16 @@ public class Explode extends GameObject{
         if(step>=ResourceMgr.explodes.length){
             GameModel.getInstance().removeGo(this);
         }
+    }
+
+    @Override
+    public Integer getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public Integer getHeight() {
+        return HEIGHT;
     }
 
 }

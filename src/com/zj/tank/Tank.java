@@ -21,7 +21,6 @@ import java.util.Random;
 public class Tank extends GameObject {
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
-    public int x, y;
     public int oldX, oldY;
     public int speed;//坦克移动速度
     public Direction directon = Direction.DOWN;//坦克移动方向
@@ -127,6 +126,16 @@ public class Tank extends GameObject {
         }
 
         move();
+    }
+
+    @Override
+    public Integer getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public Integer getHeight() {
+        return HEIGHT;
     }
 
     /**
