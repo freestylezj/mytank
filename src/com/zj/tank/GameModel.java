@@ -164,7 +164,7 @@ public class GameModel {
             ObjectOutputStream oos = null;
             try {
                 oos = new ObjectOutputStream(new FileOutputStream(f));
-                oos.writeObject(myTank);
+                oos.writeObject(myTank);//先写的得先读
                 oos.writeObject(objects);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -187,7 +187,7 @@ public class GameModel {
             ObjectInputStream ois = null;
             try {
                 ois = new ObjectInputStream(new FileInputStream(f));
-                myTank = (Tank) ois.readObject();
+                myTank = (Tank) ois.readObject();//先写的得先读（顺序不能换）
                 objects = (List<GameObject>) ois.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
