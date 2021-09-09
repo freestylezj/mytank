@@ -11,6 +11,7 @@ import com.zj.tank.util.PropertyMgr;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,11 @@ public class GameModel {
         INSTANCE.init();
     }
 
-    Tank myTank ;
+    Tank myTank;
     public List<GameObject> objects = new ArrayList<>();
     ColliderChain colliderChain = new ColliderChain();
 
-    public static GameModel getInstance(){
+    public static GameModel getInstance() {
         return INSTANCE;
     }
 
@@ -39,7 +40,7 @@ public class GameModel {
 
     }
 
-    private void  init(){
+    private void init() {
         myTank = new Tank(200, 200, 10, Group.GOOOD);
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.get("initEnemyTankCount"));
         //增加敌方坦克
@@ -48,17 +49,17 @@ public class GameModel {
         }
 
         //初始化墙
-        new Wall(150,150,200,50);
-        new Wall(550,150,200,50);
-        new Wall(300,300,50,200);
-        new Wall(550,300,50,200);
+        new Wall(150, 150, 200, 50);
+        new Wall(550, 150, 200, 50);
+        new Wall(300, 300, 50, 200);
+        new Wall(550, 300, 50, 200);
     }
 
-    public void addGo(GameObject go){
+    public void addGo(GameObject go) {
         this.objects.add(go);
     }
 
-    public void removeGo(GameObject go){
+    public void removeGo(GameObject go) {
         this.objects.remove(go);
     }
 
@@ -91,10 +92,10 @@ public class GameModel {
         }
         //碰撞检测
         for (int i = 0; i < objects.size(); i++) {
-            for (int j = i+1; j < objects.size(); j++) {
+            for (int j = i + 1; j < objects.size(); j++) {
                 GameObject o1 = objects.get(i);
                 GameObject o2 = objects.get(j);
-                colliderChain.collide(o1,o2);
+                colliderChain.collide(o1, o2);
             }
         }
     }
@@ -143,10 +144,62 @@ public class GameModel {
                 case KeyEvent.VK_CONTROL:
                     myTank.fire();
                     break;
+                case KeyEvent.VK_S:
+                    save();
+                    break;
+                case KeyEvent.VK_L:
+                    load();
+                    break;
                 default:
                     break;
             }
             setMainTankMoveDirection();
+        }
+
+        /**
+         * 存盘(memento与序列化)
+         */
+        public void save() {
+            File f = new File("E:/idea_workspace/my/mytank/tand.data");
+            ObjectOutputStream oos = null;
+            try {
+                oos = new ObjectOutputStream(new FileOutputStream(f));
+                oos.writeObject(myTank);
+                oos.writeObject(objects);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                if(oos != null){
+                    try {
+                        oos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        /**
+         * 加载存盘时内容
+         */
+        public void load() {
+            File f = new File("E:/idea_workspace/my/mytank/tand.data");
+            ObjectInputStream ois = null;
+            try {
+                ois = new ObjectInputStream(new FileInputStream(f));
+                myTank = (Tank) ois.readObject();
+                objects = (List<GameObject>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }finally {
+                if(ois != null){
+                    try {
+                        ois.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
         private void setMainTankMoveDirection() {

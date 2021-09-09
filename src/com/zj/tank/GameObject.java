@@ -1,6 +1,7 @@
 package com.zj.tank;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * @Auther: zhongj
@@ -8,7 +9,7 @@ import java.awt.*;
  * @Description: com.zj.tank
  * @version: 1.0
  */
-public abstract  class GameObject {
+public abstract  class GameObject implements Serializable {
     public int x,y;
 
     public abstract void  paint(Graphics g);
